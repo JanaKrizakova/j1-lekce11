@@ -1,7 +1,13 @@
 package cz.czechitas.lekce11.view;
 
+import com.jgoodies.binding.adapter.BasicComponentFactory;
 import cz.czechitas.lekce11.Aplikace;
 import cz.czechitas.lekce11.controller.KnihovnaController;
+import cz.czechitas.lekce11.formbuilder.ActionBuilder;
+import cz.czechitas.lekce11.formbuilder.FormBuilder;
+import cz.czechitas.lekce11.formbuilder.FormBuilderWithContainer;
+import cz.czechitas.lekce11.model.Autor;
+import cz.czechitas.lekce11.model.Kniha;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -34,19 +40,34 @@ public class AutoriFrame extends JFrame {
   }
 
   private Component createList() {
-    //TODO Implementovat seznam autorů pomocí JList – použít BasicComponentFactory
-    return new JScrollPane();
+    JList list = BasicComponentFactory.createList(controller.getAutorList());
+    return new JScrollPane(list);
   }
 
   private Component createForm() {
     JPanel panel = new JPanel(new MigLayout("wrap 2", "[right]rel[grow,fill]"));
-    //TODO Implementovat formulář – editaci jména a roku narození – použít FormBuilder
+
+    FormBuilderWithContainer<Autor> formBuilder = FormBuilder.create(controller.getAutorModel())
+            .container(panel);
+
+    formBuilder
+            .label("&Jméno")
+            .textField("jmeno")
+            .add("span");
+
+    formBuilder
+            .label("&Rok narození")
+            .numberField("rokNarozeni", "0000")
+            .add();
+
     return panel;
   }
 
   private Component createButtonStack() {
     JPanel panel = new JPanel(new MigLayout("wrap 1", "[80,fill]", "[top]"));
-    //TODO Implementovat tlačítka „Nový“, „Smazat“ a „Zavřít“ – použít ActionBuilder
+    panel.add(new JButton(controller.getNovyAutorAction()));
+    panel.add(new JButton(controller.getSmazatAutoraAction()));
+    panel.add(new JButton(controller.getAutoriSkrytAction()));
     return panel;
   }
 }

@@ -23,6 +23,10 @@ public class KnihovnaController {
   private final Action novaKnihaAction;
   private final Action smazatKnihuAction;
   private final Action autoriAction;
+
+  private final Action novyAutorAction;
+  private final Action smazatAutoraAction;
+  private final Action autoriSkrytAction;
   private final Action konecAction;
 
   public KnihovnaController() {
@@ -30,6 +34,11 @@ public class KnihovnaController {
     novaKnihaAction = ActionBuilder.create("N&ová", this::handleNovaKniha);
     smazatKnihuAction = ActionBuilder.create("&Smazat", this::handleSmazatKniha);
     autoriAction = ActionBuilder.create("&Autoři", this::handleAutori);
+
+    novyAutorAction = ActionBuilder.create("N&ový", this::handleNovyAutor);
+    smazatAutoraAction = ActionBuilder.create("&Smazat", this::handleSmazatAutora);
+    autoriSkrytAction = ActionBuilder.create("&Zavřít", this::handleSkrytAutory);
+
     konecAction = ActionBuilder.create("U&končit", this::handleKonec);
 
     if (!knihaList.isEmpty()) {
@@ -61,6 +70,18 @@ public class KnihovnaController {
   private void handleAutori() {
     autoriFrame.setLocationRelativeTo(knihyFrame);
     autoriFrame.setVisible(true);
+  }
+
+  private void handleNovyAutor() {
+    autorList.getList().add(new Autor());
+  }
+
+  private void handleSmazatAutora() {
+    autorList.getList().remove(autorList.getSelectionIndex());
+  }
+
+  private void handleSkrytAutory() {
+    autoriFrame.setVisible(false);
   }
 
   private void handleKonec() {
@@ -103,6 +124,18 @@ public class KnihovnaController {
 
   public Action getAutoriAction() {
     return autoriAction;
+  }
+
+  public Action getNovyAutorAction() {
+    return novyAutorAction;
+  }
+
+  public Action getSmazatAutoraAction() {
+    return smazatAutoraAction;
+  }
+
+  public Action getAutoriSkrytAction() {
+    return autoriSkrytAction;
   }
 
   public Action getKonecAction() {
