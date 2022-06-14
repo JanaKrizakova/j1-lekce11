@@ -13,15 +13,15 @@ public class Kniha implements ObservableBean {
 
   private String nazev;
   private Autor autor;
-  private int vydani;
-  private int rokVydani;
-  private int pocetStran;
+  private Long vydani;
+  private Long rokVydani;
+  private Long pocetStran;
   private String vydavatelstvi;
 
   public Kniha() {
   }
 
-  public Kniha(String nazev, Autor autor, int vydani, int rokVydani, int pocetStran, String vydavatelstvi) {
+  public Kniha(String nazev, Autor autor, Long vydani, Long rokVydani, Long pocetStran, String vydavatelstvi) {
     this.nazev = nazev;
     this.autor = autor;
     this.vydani = vydani;
@@ -50,32 +50,32 @@ public class Kniha implements ObservableBean {
     pcs.firePropertyChange("autor", oldValue, this.autor);
   }
 
-  public int getVydani() {
+  public Long getVydani() {
     return vydani;
   }
 
-  public void setVydani(int vydani) {
-    int oldValue = this.vydani;
+  public void setVydani(Long vydani) {
+    Long oldValue = this.vydani;
     this.vydani = vydani;
     pcs.firePropertyChange("vydani", oldValue, this.vydani);
   }
 
-  public int getRokVydani() {
+  public Long getRokVydani() {
     return rokVydani;
   }
 
-  public void setRokVydani(int rokVydani) {
-    int oldValue = this.rokVydani;
+  public void setRokVydani(Long rokVydani) {
+    Long oldValue = this.rokVydani;
     this.rokVydani = rokVydani;
     pcs.firePropertyChange("rokVydani", oldValue, this.rokVydani);
   }
 
-  public int getPocetStran() {
+  public Long getPocetStran() {
     return pocetStran;
   }
 
-  public void setPocetStran(int pocetStran) {
-    int oldValue = this.pocetStran;
+  public void setPocetStran(Long pocetStran) {
+    Long oldValue = this.pocetStran;
     this.pocetStran = pocetStran;
     pcs.firePropertyChange("pocetStran", oldValue, this.pocetStran);
   }

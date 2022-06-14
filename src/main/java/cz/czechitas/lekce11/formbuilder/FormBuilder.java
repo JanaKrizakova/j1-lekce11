@@ -100,7 +100,7 @@ public class FormBuilder<B> implements WithModel<B>, FormBuilderWithContainer<B>
 
   @Override
   public WithInput<B> numberField(String property, Consumer<JFormattedTextField> configuration) {
-    return formattedTextField(property, new NumberFormatter(), configuration);
+    return numberField(property, NumberFormat.getIntegerInstance(), configuration);
   }
 
   @Override

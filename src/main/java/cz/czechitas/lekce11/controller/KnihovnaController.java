@@ -17,6 +17,7 @@ public class KnihovnaController {
   private final SelectionInList<Kniha> knihaList = new SelectionInList<>();
   private final SelectionInList<Autor> autorList = new SelectionInList<>();
   private final PresentationModel<Kniha> knihaModel = new PresentationModel<>(knihaList.getSelectionHolder());
+  private final PresentationModel<Autor> autorModel = new PresentationModel<>(autorList.getSelectionHolder());
   private final AutoriFrame autoriFrame;
   private final KnihyFrame knihyFrame;
   private final Action novaKnihaAction;
@@ -67,13 +68,13 @@ public class KnihovnaController {
   }
 
   private void nacistData() {
-    Autor karelCapek = new Autor("Karel Čapek", 1890);
-    Autor josefCapek = new Autor("Josef Čapek", 1887);
+    Autor karelCapek = new Autor("Karel Čapek", 1890L);
+    Autor josefCapek = new Autor("Josef Čapek", 1887L);
     autorList.getList().add(karelCapek);
     autorList.getList().add(josefCapek);
 
-    knihaList.getList().add(new Kniha("Dášeňka, čili, Život štěněte", karelCapek, 1, 1999, 78, "Amulet"));
-    knihaList.getList().add(new Kniha("Povídání o pejskovi a kočičce", josefCapek, 16, 1984, 115, "Albatros"));
+    knihaList.getList().add(new Kniha("Dášeňka, čili, Život štěněte", karelCapek, 1L, 1999L, 78L, "Amulet"));
+    knihaList.getList().add(new Kniha("Povídání o pejskovi a kočičce", josefCapek, 16L, 1984L, 115L, "Albatros"));
   }
 
   public SelectionInList<Kniha> getKnihaList() {
@@ -86,6 +87,10 @@ public class KnihovnaController {
 
   public PresentationModel<Kniha> getKnihaModel() {
     return knihaModel;
+  }
+
+  public PresentationModel<Autor> getAutorModel() {
+    return autorModel;
   }
 
   public Action getNovaKnihaAction() {

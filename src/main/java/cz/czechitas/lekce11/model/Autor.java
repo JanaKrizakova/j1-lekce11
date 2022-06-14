@@ -12,12 +12,12 @@ import java.util.Objects;
 public class Autor implements ObservableBean {
   private final ExtendedPropertyChangeSupport pcs = new ExtendedPropertyChangeSupport(this);
   private String jmeno;
-  private int rokNarozeni;
+  private Long rokNarozeni;
 
   public Autor() {
   }
 
-  public Autor(String jmeno, int rokNarozeni) {
+  public Autor(String jmeno, Long rokNarozeni) {
     this.jmeno = jmeno;
     this.rokNarozeni = rokNarozeni;
   }
@@ -32,12 +32,12 @@ public class Autor implements ObservableBean {
     pcs.firePropertyChange("jmeno", oldValue, this.jmeno);
   }
 
-  public int getRokNarozeni() {
+  public Long getRokNarozeni() {
     return rokNarozeni;
   }
 
-  public void setRokNarozeni(int rokNarozeni) {
-    int oldValue = this.rokNarozeni;
+  public void setRokNarozeni(Long rokNarozeni) {
+    Long oldValue = this.rokNarozeni;
     this.rokNarozeni = rokNarozeni;
     pcs.firePropertyChange("rokNarozeni", oldValue, this.rokNarozeni);
   }
@@ -62,7 +62,7 @@ public class Autor implements ObservableBean {
     if (this == o) return true;
     if (!(o instanceof Autor)) return false;
     Autor autor = (Autor) o;
-    return rokNarozeni == autor.rokNarozeni && jmeno.equals(autor.jmeno);
+    return Objects.equals(jmeno, autor.jmeno) && Objects.equals(rokNarozeni, autor.rokNarozeni);
   }
 
   @Override
