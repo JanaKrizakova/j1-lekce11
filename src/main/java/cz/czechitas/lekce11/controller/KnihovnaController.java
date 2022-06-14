@@ -1,9 +1,7 @@
 package cz.czechitas.lekce11.controller;
 
 import com.jgoodies.binding.PresentationModel;
-import com.jgoodies.binding.adapter.Bindings;
 import com.jgoodies.binding.list.SelectionInList;
-import com.jgoodies.binding.value.ValueModel;
 import cz.czechitas.lekce11.formbuilder.ActionBuilder;
 import cz.czechitas.lekce11.model.Autor;
 import cz.czechitas.lekce11.model.Kniha;
@@ -21,20 +19,27 @@ public class KnihovnaController {
   private final PresentationModel<Kniha> knihaModel = new PresentationModel<>(knihaList.getSelectionHolder());
   private final AutoriFrame autoriFrame;
   private final KnihyFrame knihyFrame;
-  private final Action novaAction;
-  private final Action smazatAction;
+  private final Action novaKnihaAction;
+  private final Action smazatKnihuAction;
   private final Action autoriAction;
   private final Action konecAction;
 
   public KnihovnaController() {
-    vytvoritData();
-    novaAction = ActionBuilder.create("N&ová", this::handleNovaKniha);
-    smazatAction = ActionBuilder.create("&Smazat", this::handleSmazatKniha);
+    nacistData();
+    novaKnihaAction = ActionBuilder.create("N&ová", this::handleNovaKniha);
+    smazatKnihuAction = ActionBuilder.create("&Smazat", this::handleSmazatKniha);
     autoriAction = ActionBuilder.create("&Autoři", this::handleAutori);
     konecAction = ActionBuilder.create("U&končit", this::handleKonec);
 
-    smazatAction.setEnabled(knihaList.hasSelection());
-    knihaList.addPropertyChangeListener("selectionEmpty", (event) -> smazatAction.setEnabled(!(Boolean) event.getNewValue()));
+    if (!knihaList.isEmpty()) {
+      knihaList.setSelectionIndex(0);
+    }
+    if (!autorList.isEmpty()) {
+      autorList.setSelectionIndex(0);
+    }
+
+    smazatKnihuAction.setEnabled(knihaList.hasSelection());
+    knihaList.addPropertyChangeListener("selectionEmpty", (event) -> smazatKnihuAction.setEnabled(!(Boolean) event.getNewValue()));
 
     autoriFrame = new AutoriFrame(this);
     knihyFrame = new KnihyFrame(this);
@@ -61,7 +66,7 @@ public class KnihovnaController {
     System.exit(0);
   }
 
-  private void vytvoritData() {
+  private void nacistData() {
     Autor karelCapek = new Autor("Karel Čapek", 1890);
     Autor josefCapek = new Autor("Josef Čapek", 1887);
     autorList.getList().add(karelCapek);
@@ -83,12 +88,12 @@ public class KnihovnaController {
     return knihaModel;
   }
 
-  public Action getNovaAction() {
-    return novaAction;
+  public Action getNovaKnihaAction() {
+    return novaKnihaAction;
   }
 
-  public Action getSmazatAction() {
-    return smazatAction;
+  public Action getSmazatKnihuAction() {
+    return smazatKnihuAction;
   }
 
   public Action getAutoriAction() {

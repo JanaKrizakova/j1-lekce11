@@ -29,7 +29,7 @@ public class KnihyFrame extends JFrame {
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Aplikace.class.getResource("czechitas-icon.png")).getImage());
-    setMinimumSize(new Dimension(600, 400));
+    setMinimumSize(new Dimension(600, 300));
     setLayout(new BorderLayout());
 
     add(createMainPanel(), BorderLayout.CENTER);
@@ -49,9 +49,9 @@ public class KnihyFrame extends JFrame {
   }
 
   private Component createButtonStack() {
-    JPanel panel = new JPanel(new MigLayout("wrap 1", "[fill]", "[top]"));
-    panel.add(new JButton(controller.getNovaAction()));
-    panel.add(new JButton(controller.getSmazatAction()));
+    JPanel panel = new JPanel(new MigLayout("wrap 1", "[80,fill]", "[top]"));
+    panel.add(new JButton(controller.getNovaKnihaAction()));
+    panel.add(new JButton(controller.getSmazatKnihuAction()));
     panel.add(new JButton(controller.getAutoriAction()));
     panel.add(new JButton(controller.getKonecAction()));
     return panel;
