@@ -11,5 +11,4 @@ public class Aplikace {
         FlatLightLaf.setup();
         new KnihovnaController().start();
     }
-
 }
